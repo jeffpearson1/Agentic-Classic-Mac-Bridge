@@ -1,0 +1,16 @@
+# Build output
+/build/
+
+# ROMs, Apple system software and disk images: never commit these
+/images/
+*.rom
+*.ROM
+*.dsk
+*.img
+*.hda
+*.image
+
+# Host tooling
+__pycache__/
+*.pyc
+.venv/

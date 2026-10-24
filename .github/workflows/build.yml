@@ -1,0 +1,28 @@
+name: Build Mac apps
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  apps:
+    runs-on: ubuntu-latest
+    container: ghcr.io/autc04/retro68:latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Ninja
+        run: apt-get update -qq && apt-get install -y -qq ninja-build
+
+      - name: Build
+        run: scripts/build.sh
+
+      - name: Upload MacBinary apps
+        uses: actions/upload-artifact@v4
+        with:
+          name: mac-apps
+          path: |
+            build/apps/**/*.bin
+            build/apps/**/*.dsk
+          if-no-files-found: error
